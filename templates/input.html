@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <form action="{{ url_for('index') }}" method="post">
+        <div class="row">
+            <div class="form-group col-8">
+                <label for="type">Tipo de partida</label>
+                <select id="type" class="form-control" name="type">
+					<option value="normal">Normal</option>
+					<option value="ranked">Ranked</option>
+					<option value="flex">Flex</option>
+					<option value="aram">ARAM</option>
+				</select>
+            </div>
+            <div class="form-group col-2">
+                <label for="input-minutes">Minutos</label>
+                <input type="number" id="input-minutes" class="form-control" name="minutes">
+            </div>
+			<div class="form-group col-2">
+                <label for="input-seconds">Segundos</label>
+                <input type="number" id="input-seconds" class="form-control" name="seconds">
+            </div>
+        </div>
+		<div class="row">
+			<div class="form-group col-4">
+				<label for="role">Rol</label>
+				<select id="role" class="form-control" name="role">
+                    <option value="">--SELECT A ROLE--</option>
+					<option value="top">Top</option>
+					<option value="jg">Jungla</option>
+					<option value="mid">Mid</option>
+					<option value="adc">ADC</option>
+					<option value="sup">Support</option>
+				</select>
+			</div>
+			<div class="form-group col-4">
+				<label for="champ">Champ</label>
+				<select id="champ" class="form-control" name="champ">
+                    <option value="">--SELECT A CHAMPION--</option>
+					{% for champ in champs %}
+					<option value="{{ champ }}">{{ champ }}</option>
+					{% endfor %}
+				</select>
+			</div>
+            <div class="form-group col">
+                <label for="input-kills">Kills</label>
+                <input type="number" id="input-kills" class="form-control" name="kills">
+            </div>
+            <div class="form-group col">
+                <label for="input-deaths">Deaths</label>
+                <input type="number" id="input-deaths" class="form-control" name="deaths">
+            </div>
+			<div class="form-group col">
+                <label for="input-assists">Assists</label>
+                <input type="number" id="input-assists" class="form-control" name="assists">
+            </div>
+		</div>
+        <div class="row">
+            <div class="form-group col">
+                <label for="input-dmg">Damage</label>
+                <input type="number" id="input-dmg" class="form-control" name="dmg">
+            </div>
+            <div class="form-group col">
+                <label for="input-shield">Shield</label>
+                <input type="number" id="input-shield" class="form-control" name="shield">
+            </div>
+            <div class="form-group col">
+                <label for="input-heal">Heal</label>
+                <input type="number" id="input-heal" class="form-control" name="heal">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <label for="input-cs">CS</label>
+                <input type="number" id="input-cs" class="form-control" name="cs">
+            </div>
+            <div class="form-group col">
+                <label for="input-gold">Gold</label>
+                <input type="number" id="input-gold" class="form-control" name="gold">
+            </div>
+            <div class="form-group col">
+                <label for="input-vision">Vision</label>
+                <input type="number" id="input-vision" class="form-control" name="vision">
+            </div>
+            <div class="form-group col">
+                <label for="result">Result</label>
+                <select id="score" class="form-control" name="result">
+					<option value="W">Win</option>
+					<option value="L">Loss</option>
+				</select>
+            </div>
+            <div class="form-group col">
+                <label for="score">Score</label>
+                <select id="score" class="form-control" name="score">
+					<option value="15">S+</option>
+					<option value="14">S</option>
+					<option value="13">S-</option>
+					<option value="12">A+</option>
+					<option value="11">A</option>
+					<option value="10">A-</option>
+					<option value="9">B+</option>
+					<option value="8">B</option>
+					<option value="7">B-</option>
+					<option value="6">C+</option>
+					<option value="5">C</option>
+					<option value="4">C-</option>
+					<option value="3">D+</option>
+					<option value="2">D</option>
+					<option value="1">D-</option>
+				</select>
+            </div>
+        </div>
+        <strong>Rival</strong>
+        <div class="row">
+			<div class="form-group col-4">
+				<label for="rchamp">Champ</label>
+				<select id="rchamp" class="form-control" name="rchamp">
+                    <option value="">--SELECT A CHAMPION--</option>
+					{% for champ in champs %}
+					<option value="{{ champ }}">{{ champ }}</option>
+					{% endfor %}
+				</select>
+			</div>
+            <div class="form-group col-2">
+                <label for="input-rcs">CS</label>
+                <input type="number" id="input-rcs" class="form-control" name="rcs">
+            </div>
+            <div class="form-group col-2">
+                <label for="input-rgold">Gold</label>
+                <input type="number" id="input-rgold" class="form-control" name="rgold">
+            </div>
+            <div class="form-group col">
+                <label for="input-rkills">Kills</label>
+                <input type="number" id="input-rkills" class="form-control" name="rkills">
+            </div>
+            <div class="form-group col">
+                <label for="input-rdeaths">Deaths</label>
+                <input type="number" id="input-rdeaths" class="form-control" name="rdeaths">
+            </div>
+			<div class="form-group col">
+                <label for="input-rassists">Assists</label>
+                <input type="number" id="input-rassists" class="form-control" name="rassists">
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" id="submit">
+    </form>
+</div>
+{% endblock %}
