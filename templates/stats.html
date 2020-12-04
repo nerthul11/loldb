@@ -5,26 +5,56 @@
 {% block body %}
 <div class="container">
     <p>Filter by:</p>
+        <form id="form">
+            <div class="row">
+                <div class="col">
+                    <label for="mode">Game mode</label>
+                    <select id="mode" class="form-control" name="mode">
+                        <option value="">Any</option>
+                        <option value="normal">Normal</option>
+                        <option value="ranked">Ranked</option>
+                        <option value="flex">Flex</option>
+                        <option value="aram">ARAM</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="champ">Champion</label>
+                    <select id="champ" class="form-control" name="champ">
+                        <option value="">Any champion</option>
+                        {% for champ in champs %}
+                        <option value="{{ champ }}">{{ champ }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="number">Game number to display:</label>
+                    <select id="number" class="form-control" name="number">
+                        <option value="100000">All games</option>
+                        <option value="1000">Last 1000 games</option>
+                        <option value="500">Last 500 games</option>
+                        <option value="200">Last 200 games</option>
+                        <option value="100">Last 100 games</option>
+                        <option value="50">Last 50 games</option>
+                        <option value="20">Last 20 games</option>
+                        <option value="10">Last 10 games</option>
+                        <option value="5">Last 5 games</option>
+                    </select>
+                </div>
+            </div>
+        </form>
     <div class="row">
-        <div class="col-6">
-            <label for="type">Game type</label>
-            <select id="type" class="form-control" name="type">
-                <option value="any">Any</option>
-                <option value="normal">Normal</option>
-                <option value="ranked">Ranked</option>
-                <option value="flex">Flex</option>
-                <option value="aram">ARAM</option>
-            </select>
-        </div>
-        <div class="col-6">
-            <label for="champ">Champion</label>
-            <select id="champ" class="form-control" name="type">
-                {% for champ in champs %}
-                <option value={{ champ }}>{{ champ }}</option>
-                {% endfor %}
-            </select>
-        </div>
+        <div class="col" id="piechart1"></div>
+        <div class="col" id="piechart2"></div>
     </div>
-    <div id="piechart"></div>
+    <div class="row">
+        <ul class="col-6">
+            <li id="games">Games played:</li>
+            <li id="winrate">Winrate:</li>
+            <li id="kda">Average KDA:</li>
+            <li id="csm">Average CS/minute:</li>
+            <li id="gpm">Average GP/minute:</li>
+            <li id="duration">Average game duration:</li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
