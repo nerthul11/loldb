@@ -10,19 +10,19 @@
 
         var gameModes = google.visualization.arrayToDataTable([
         ['Mode', 'Games played'],
-        ['Normal', 8],
-        ['Ranked', 2],
-        ['Flex', 2],
-        ['ARAM', 2]
+        ['Normal', parseInt(document.getElementById('normal').innerHTML)],
+        ['Ranked', parseInt(document.getElementById('ranked').innerHTML)],
+        ['Flex', parseInt(document.getElementById('flex').innerHTML)],
+        ['ARAM', parseInt(document.getElementById('aram').innerHTML)]
     ]);
 
         var role = google.visualization.arrayToDataTable([
         ['Role', 'Games played'],
-        ['Top', 2],
-        ['JG', 2],
-        ['Mid', 2],
-        ['ADC', 2],
-        ['Support', 2],
+        ['Top', parseInt(document.getElementById('top').innerHTML)],
+        ['JG', parseInt(document.getElementById('jg').innerHTML)],
+        ['Mid', parseInt(document.getElementById('mid').innerHTML)],
+        ['ADC', parseInt(document.getElementById('adc').innerHTML)],
+        ['Support', parseInt(document.getElementById('sup').innerHTML)],
     ]);
 
         // Optional; add a title and set the width and height of the chart
@@ -52,6 +52,22 @@
             const data = JSON.parse(request.responseText)
 
             // Update HTML
+            document.getElementById('normal').innerHTML = data.gameModes.normal
+            document.getElementById('ranked').innerHTML = data.gameModes.ranked
+            document.getElementById('flex').innerHTML = data.gameModes.flex
+            document.getElementById('aram').innerHTML = data.gameModes.aram
+            document.getElementById('top').innerHTML = data.roles.top
+            document.getElementById('jg').innerHTML = data.roles.jg
+            document.getElementById('mid').innerHTML = data.roles.mid
+            document.getElementById('adc').innerHTML = data.roles.adc
+            document.getElementById('sup').innerHTML = data.roles.sup
+            document.getElementById('games').innerHTML = data.gamesPlayed
+            document.getElementById('winrate').innerHTML = data.winrate
+            document.getElementById('kda').innerHTML = data.kda
+            document.getElementById('csm').innerHTML = data.csm
+            document.getElementById('gpm').innerHTML = data.gpm
+            document.getElementById('duration').innerHTML = data.averageDuration
+            document.getElementById('vision').innerHTML = data.vision
             loadCharts()
             }
         }

@@ -42,17 +42,33 @@
             </div>
         </form>
     <div class="row">
+        <div id="gameModes" style="display: none">
+            <div id="normal"></div>
+            <div id="ranked"></div>
+            <div id="flex"></div>
+            <div id="aram"></div>
+        </div>
+        <div id="roles" style="display: none">
+            <div id="top"></div>
+            <div id="jg"></div>
+            <div id="mid"></div>
+            <div id="adc"></div>
+            <div id="sup"></div>
+        </div>
         <div class="col" id="piechart1"></div>
-        <div class="col" id="piechart2"></div>
+        <div class="col" id="piechart2"><span id="rolesPlayed" style="display: none"></span></div>
     </div>
     <div class="row">
         <ul class="col-6">
-            <li id="games">Games played:</li>
-            <li id="winrate">Winrate:</li>
-            <li id="kda">Average KDA:</li>
-            <li id="csm">Average CS/minute:</li>
-            <li id="gpm">Average GP/minute:</li>
-            <li id="duration">Average game duration:</li>
+            <li>Games played: <span id="games"></span></li>
+            <li>Winrate: <span id="winrate"></span>%</li>
+            <li>Average KDA: <span id="kda"></span></li>
+            <li>Average CS/minute: <span id="csm"></span></li>
+            <li>Average GP/minute: <span id="gpm"></span></li>
+            <li>Average game duration: <span id="duration"></span></li>
+        </ul>
+        <ul class="col-6">
+            <li>Average vision/hour: <span id="vision"></span></li>
         </ul>
     </div>
 </div>
