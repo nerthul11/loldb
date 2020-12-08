@@ -7,9 +7,10 @@
 
     // Draw the chart and set the chart values
     function drawCharts() {
+
         var gameModes = google.visualization.arrayToDataTable([
         ['Mode', 'Games played'],
-        ['Normal', 2],
+        ['Normal', 8],
         ['Ranked', 2],
         ['Flex', 2],
         ['ARAM', 2]
@@ -61,6 +62,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mode').setAttribute('onchange', 'updateData()')
     document.getElementById('champ').setAttribute('onchange', 'updateData()')
     document.getElementById('number').setAttribute('onchange', 'updateData()')
-
     updateData()
 })
