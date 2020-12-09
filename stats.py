@@ -1,30 +1,23 @@
 from flask import Flask, jsonify, render_template, request
 from data import *
-from sqlalchemy import and_, or_
 
 def stats():
     return render_template("stats.html", champs=champs)
 
 def query():
+    # Do the thing according to filters
     filters = request.get_json("filters")
-    if filters['mode'] and filters['champ']:
-        games = (Game.query
-                .filter_by(game_mode=filters['mode'])
-                .filter_by(champ=filters['champ'])
-                .order_by(Game.id.desc())
-                .limit(int(filters['gameNumber']))
-                .all()
-                )
-    elif filters['mode'] or filters['champ']:
-        games = (Game.query
-         .filter(or_(Game.game_mode.ilike(filters['mode']), Game.champ.ilike(filters['champ'])))
-         .order_by(Game.id.desc())
-         .limit(int(filters['gameNumber']))
-         .all()
-         )
-    else:
-        games = Game.query.order_by(Game.id.desc()).limit(int(filters['gameNumber'])).all()
-
+    gameNumber = int(filters["gameNumber"])
+    filters.pop("gameNumber")
+    games = Game.query
+    pop = []
+    for filter in filters:
+        if not filters[filter]:
+            pop.append(filter)
+    for filter in pop:
+        filters.pop(filter)
+    games = games.filter_by(**filters)
+    games = games.order_by(Game.id.desc()).limit(gameNumber).all()
     if games:
         # Defining and resetting variables
         games_played = len(games)
@@ -38,6 +31,7 @@ def query():
         vision = 0
         duration = 0
 
+        # Iterate through games to create results
         for match in games:
             mode = match.game_mode
             role = match.role
@@ -54,6 +48,7 @@ def query():
             if match.vision != "":
                 vision += int(match.vision)
 
+        # Work with the results
         kda = round(ka / d, 2)
         winrate = round(wins * 100 / games_played, 2)
         csm = round(cs * 60 / duration, 2)
@@ -61,7 +56,10 @@ def query():
         vision = round(vision * 3600 / duration, 2)
         avg_duration = int(duration / games_played)
         avg_duration = f"{avg_duration // 60:02}:{avg_duration % 60:02}"
+
+        # Compose the JSON to return
         data = {
+            "success": True,
             "gameModes": game_modes,
             "roles": roles,
             "gamesPlayed": games_played,
@@ -74,4 +72,4 @@ def query():
         }
         return jsonify(data)
     else:
-        return jsonify({"error": "No games found"})
+        return jsonify({"success": False})

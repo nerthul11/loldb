@@ -27,6 +27,17 @@
                     </select>
                 </div>
                 <div class="col">
+                    <label for="role">Rol</label>
+                    <select id="role" class="form-control" name="role">
+                        <option value="">Any</option>
+                        <option value="top">Top</option>
+                        <option value="jg">Jungla</option>
+                        <option value="mid">Mid</option>
+                        <option value="adc">ADC</option>
+                        <option value="sup">Support</option>
+                    </select>
+                </div>
+                <div class="col">
                     <label for="number">Game number to display:</label>
                     <select id="number" class="form-control" name="number">
                         <option value="500">Last 500 games</option>
@@ -48,7 +59,7 @@
             <div id="flex"></div>
             <div id="aram"></div>
         </div>
-        <div id="roles" style="display: none">
+        <div id="rolesPlayed" style="display: none">
             <div id="top"></div>
             <div id="jg"></div>
             <div id="mid"></div>
@@ -56,7 +67,7 @@
             <div id="sup"></div>
         </div>
         <div class="col" id="piechart1"></div>
-        <div class="col" id="piechart2"><span id="rolesPlayed" style="display: none"></span></div>
+        <div class="col" id="piechart2"></div>
     </div>
     <div class="row">
         <ul class="col-6">

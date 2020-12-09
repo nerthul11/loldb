@@ -38,10 +38,11 @@
 
     function updateData() {
         // Create AJAX request and define values
-        const request = new XMLHttpRequest()
-        const filters = {
-        "mode": document.querySelector('#mode').value,
-        "champ": document.querySelector('#champ').value,
+        const request = new XMLHttpRequest(),
+        filters = {
+        "game_mode": document.querySelector('#mode').value != '' ? document.querySelector('#mode').value : null,
+        "champ": document.querySelector('#champ').value != '' ? document.querySelector('#champ').value : null,
+        "role": document.querySelector('#role').value != '' ? document.querySelector('#role').value : null,
         "gameNumber": document.querySelector('#number').value
         }
 
@@ -52,23 +53,28 @@
             const data = JSON.parse(request.responseText)
 
             // Update HTML
-            document.getElementById('normal').innerHTML = data.gameModes.normal
-            document.getElementById('ranked').innerHTML = data.gameModes.ranked
-            document.getElementById('flex').innerHTML = data.gameModes.flex
-            document.getElementById('aram').innerHTML = data.gameModes.aram
-            document.getElementById('top').innerHTML = data.roles.top
-            document.getElementById('jg').innerHTML = data.roles.jg
-            document.getElementById('mid').innerHTML = data.roles.mid
-            document.getElementById('adc').innerHTML = data.roles.adc
-            document.getElementById('sup').innerHTML = data.roles.sup
-            document.getElementById('games').innerHTML = data.gamesPlayed
-            document.getElementById('winrate').innerHTML = data.winrate
-            document.getElementById('kda').innerHTML = data.kda
-            document.getElementById('csm').innerHTML = data.csm
-            document.getElementById('gpm').innerHTML = data.gpm
-            document.getElementById('duration').innerHTML = data.averageDuration
-            document.getElementById('vision').innerHTML = data.vision
-            loadCharts()
+            if (data.success === true) {
+                document.getElementById('normal').innerHTML = data.gameModes.normal
+                document.getElementById('ranked').innerHTML = data.gameModes.ranked
+                document.getElementById('flex').innerHTML = data.gameModes.flex
+                document.getElementById('aram').innerHTML = data.gameModes.aram
+                document.getElementById('top').innerHTML = data.roles.top
+                document.getElementById('jg').innerHTML = data.roles.jg
+                document.getElementById('mid').innerHTML = data.roles.mid
+                document.getElementById('adc').innerHTML = data.roles.adc
+                document.getElementById('sup').innerHTML = data.roles.sup
+                document.getElementById('games').innerHTML = data.gamesPlayed
+                document.getElementById('winrate').innerHTML = data.winrate
+                document.getElementById('kda').innerHTML = data.kda
+                document.getElementById('csm').innerHTML = data.csm
+                document.getElementById('gpm').innerHTML = data.gpm
+                document.getElementById('duration').innerHTML = data.averageDuration
+                document.getElementById('vision').innerHTML = data.vision
+                loadCharts()
+            }
+            else {
+                console.log("No games found")
+            }
             }
         }
         request.open('POST', '/query')
@@ -77,6 +83,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mode').setAttribute('onchange', 'updateData()')
     document.getElementById('champ').setAttribute('onchange', 'updateData()')
+    document.getElementById('role').setAttribute('onchange', 'updateData()')
     document.getElementById('number').setAttribute('onchange', 'updateData()')
     updateData()
 })
